@@ -310,4 +310,4 @@ For issues or questions, please create an issue in the repository.
 ---
 
 **Live Application**: [Add your deployed URL here]
-**GitHub Repository**: [Add your repository URL here]
+**GitHub Repository**: https://github.com/AryanWalia326/Task-Manager.git
