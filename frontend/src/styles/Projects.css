@@ -1,0 +1,77 @@
+.projects-container {
+  padding: 20px;
+}
+
+.projects-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.projects-header h2 {
+  font-size: 28px;
+  margin: 0;
+}
+
+.project-form {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+.project-form input,
+.project-form textarea {
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-family: inherit;
+}
+
+.project-form textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.project-card {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.project-card h3 {
+  margin: 0 0 10px 0;
+  color: #333;
+}
+
+.project-card p {
+  color: #666;
+  font-size: 14px;
+  margin: 0 0 15px 0;
+  min-height: 40px;
+}
+
+.project-meta {
+  display: flex;
+  gap: 10px;
+  color: #999;
+  font-size: 12px;
+}

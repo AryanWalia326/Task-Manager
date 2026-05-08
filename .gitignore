@@ -1,0 +1,36 @@
+# Environment and build files
+.env
+.env.local
+.env.production.local
+.env.test.local
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Build outputs
+dist/
+build/
+.next/
+
+# Testing
+coverage/
+.nyc_output/
+
+# Logs
+logs/
+*.log
+
+# Database
+*.mongodb
+*.db
+
+# OS
+Thumbs.db

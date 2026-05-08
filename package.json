@@ -1,0 +1,17 @@
+{
+  "name": "task-manager",
+  "version": "1.0.0",
+  "description": "Team Task Manager - Full Stack Application",
+  "private": true,
+  "scripts": {
+    "backend:install": "cd backend && npm install",
+    "frontend:install": "cd frontend && npm install",
+    "backend:dev": "cd backend && npm run dev",
+    "frontend:dev": "cd frontend && npm run dev",
+    "backend:build": "cd backend && npm run build",
+    "frontend:build": "cd frontend && npm run build"
+  },
+  "keywords": ["task", "manager", "team", "collaboration"],
+  "author": "",
+  "license": "MIT"
+}

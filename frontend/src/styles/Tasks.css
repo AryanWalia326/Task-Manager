@@ -1,0 +1,138 @@
+.tasks-container {
+  padding: 20px;
+}
+
+.tasks-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.tasks-header h2 {
+  font-size: 28px;
+  margin: 0;
+}
+
+.task-form {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+.task-form input,
+.task-form textarea,
+.task-form select {
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-family: inherit;
+}
+
+.task-form textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.filter-bar {
+  margin-bottom: 20px;
+}
+
+.filter-bar select {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-family: inherit;
+}
+
+.tasks-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.task-card {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.task-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  margin-bottom: 10px;
+  gap: 10px;
+}
+
+.task-header h3 {
+  margin: 0;
+  flex: 1;
+}
+
+.priority-badge {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.priority-low {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.priority-medium {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.priority-high {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.task-description {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 15px;
+  min-height: 40px;
+}
+
+.task-meta {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+  font-size: 12px;
+  color: #999;
+}
+
+.task-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.task-actions select {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.task-actions button {
+  padding: 8px 12px;
+  font-size: 12px;
+}
