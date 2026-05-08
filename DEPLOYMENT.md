@@ -38,27 +38,31 @@ git push -u origin main
 
 ## Step 3: Backend Deployment on Railway
 
-### Option A: Using Railway Dashboard
+### Option A: Using Railway Dashboard (RECOMMENDED)
 
 1. Go to https://railway.app/dashboard
-2. Create a new project
-3. Click "Deploy from GitHub repo"
-4. Authorize GitHub and select your repository
-5. Select the Task Manager repository
-6. Wait for detection, then select the backend folder (configure root directory as `backend/` if needed)
-7. Railway will auto-detect the Node.js application
-8. Add environment variables:
-   - Go to Variables tab
-   - Add:
-     ```
-     MONGODB_URI=mongodb+srv://user:password@cluster.mongodb.net/task-manager
-     JWT_SECRET=generate_a_random_secret_key_here
-     NODE_ENV=production
-     FRONTEND_URL=https://your-frontend-railway-domain.up.railway.app
-     PORT=5000
-     ```
-9. Click Deploy
-10. Copy the deployed backend URL (e.g., `https://task-manager-backend.up.railway.app`)
+2. Click "New Project" → "Deploy from GitHub repo"
+3. Authorize GitHub and select your repository
+4. Select the **task-manager** repository
+5. Once deployed, click on the service
+6. Go to **Settings** tab
+7. **Important:** Set Root Directory to `backend/`
+   - Click "Edit" next to "Root Directory"
+   - Enter: `backend`
+   - Click Save
+8. Go to **Deploy** tab and click "Redeploy"
+9. Wait for build to complete, then go to **Variables** tab
+10. Add environment variables:
+    ```
+    MONGODB_URI=mongodb+srv://user:password@cluster.mongodb.net/task-manager
+    JWT_SECRET=generate_a_random_secret_key_here
+    NODE_ENV=production
+    FRONTEND_URL=https://your-frontend-railway-domain.up.railway.app
+    PORT=5000
+    ```
+11. The deployment will auto-redeploy with variables
+12. Go to **Deployments** tab and wait for "Succeeded" status
+13. Copy the Service URL (your backend URL)
 
 ### Option B: Using Railway CLI
 
@@ -114,26 +118,43 @@ After frontend deployment, update the backend's `FRONTEND_URL` environment varia
 
 ## Troubleshooting
 
+### ❌ Error: "No start command detected"
+
+**This is the error you likely got. Here's the fix:**
+
+1. Go to Railway dashboard → Your project → Backend service
+2. Click **Settings** tab
+3. Look for **Root Directory** setting
+4. **Click Edit** and set it to: `backend/`
+5. Go to **Deploy** tab
+6. Click **Redeploy**
+7. Wait for build to complete
+
+**Why this happens:** Railway deploys from repo root by default, but your package.json with the start script is in the `backend/` folder.
+
+---
+
 ### Backend not connecting to MongoDB
-- Check MongoDB connection string
-- Verify IP whitelist in MongoDB Atlas
+- Check MongoDB connection string in `MONGODB_URI`
+- Verify IP whitelist in MongoDB Atlas (should be 0.0.0.0/0 for Railway)
 - Ensure credentials are correct
-- Check `MONGODB_URI` environment variable
+- Make sure the database name is in the URL: `/task-manager`
 
 ### CORS errors
-- Verify `FRONTEND_URL` in backend matches deployed frontend URL
-- Clear browser cache
+- Verify `FRONTEND_URL` in backend environment variables matches deployed frontend URL
+- Clear browser cache (Ctrl+Shift+Delete)
 - Check browser console for exact error
 
 ### Frontend can't reach backend
-- Verify `VITE_API_URL` points to correct backend URL
-- Check network tab in browser dev tools
-- Verify backend is running on Railway
+- Verify `VITE_API_URL` points to correct backend URL (should be the Railway service URL)
+- Check network tab in browser dev tools (F12)
+- Verify backend is running on Railway (check Deployments tab for "Succeeded" status)
 
-### Build failures
-- Check Railway logs
-- Ensure all dependencies are in package.json
-- Verify node version compatibility
+### Build failures on Railway
+- Check Railway logs (click on deployment and view logs)
+- Ensure root directory is set to `backend/` for backend service
+- Verify package.json has "start" script: `"start": "node server.js"`
+- Check Node version compatibility
 
 ## Environment Variables Summary
 

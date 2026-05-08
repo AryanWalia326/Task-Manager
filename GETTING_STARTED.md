@@ -31,7 +31,7 @@ bash setup.sh
 
 **Or manually:**
 ```bash
-cd backend && && cd ../frontend && npm install
+cd backend && npm install && cd ../frontend && npm install
 ```
 
 ### Step 2: Configure MongoDB
@@ -237,11 +237,14 @@ Task Manager/
 
 | Issue | Solution |
 |-------|----------|
-| Backend won't start | Check MongoDB connection string |
-| Frontend won't load | Verify backend is running |
-| API 401 errors | Check JWT token in localStorage |
-| CORS errors | Verify FRONTEND_URL in .env |
-| Database errors | Check MongoDB Atlas IP whitelist |
+| Backend won't start | Check MongoDB connection string in .env |
+| Frontend won't load | Verify backend is running on port 5000 |
+| API 401 errors | Check JWT token in browser localStorage |
+| CORS errors | Verify FRONTEND_URL in backend/.env |
+| Database errors | Check MongoDB Atlas IP whitelist (add 0.0.0.0/0) |
+| **Railway: "No start command"** | **Set Root Directory to `backend/` in Railway Settings** |
+| Railway build fails | Make sure root directory is set correctly |
+| Frontend can't reach backend | Check VITE_API_URL in frontend/.env |
 
 ## 📞 Support Resources
 
