@@ -9,5 +9,5 @@ require('dotenv').config({ path: './backend/.env' });
 require('./backend/server.js');
 const cors = require('cors');
 app.use(cors({
-  origin: task-manager-production-18e8.up.railway.app'
+  origin: 'https://task-manager-production-18e8.up.railway.app'
 }));
