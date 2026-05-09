@@ -3,6 +3,7 @@
 
 [build]
 builder = "nixpacks"
+buildCommand = ""
 
 [deploy]
 startCommand = "node server.js"
