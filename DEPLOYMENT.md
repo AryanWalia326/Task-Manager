@@ -38,31 +38,27 @@ git push -u origin main
 
 ## Step 3: Backend Deployment on Railway
 
-### Option A: Using Railway Dashboard (RECOMMENDED)
+### The Easy Way (Recommended)
 
 1. Go to https://railway.app/dashboard
 2. Click "New Project" → "Deploy from GitHub repo"
 3. Authorize GitHub and select your repository
 4. Select the **task-manager** repository
-5. Once deployed, click on the service
-6. Go to **Settings** tab
-7. **Important:** Set Root Directory to `backend/`
-   - Click "Edit" next to "Root Directory"
-   - Enter: `backend`
-   - Click Save
-8. Go to **Deploy** tab and click "Redeploy"
-9. Wait for build to complete, then go to **Variables** tab
-10. Add environment variables:
-    ```
-    MONGODB_URI=mongodb+srv://user:password@cluster.mongodb.net/task-manager
-    JWT_SECRET=generate_a_random_secret_key_here
-    NODE_ENV=production
-    FRONTEND_URL=https://your-frontend-railway-domain.up.railway.app
-    PORT=5000
-    ```
-11. The deployment will auto-redeploy with variables
-12. Go to **Deployments** tab and wait for "Succeeded" status
-13. Copy the Service URL (your backend URL)
+5. Railway will auto-detect Node.js and use the root `package.json`
+6. Go to **Variables** tab and add:
+   ```
+   MONGODB_URI=mongodb+srv://user:password@cluster.mongodb.net/task-manager
+   JWT_SECRET=generate_a_random_secret_key_here
+   NODE_ENV=production
+   FRONTEND_URL=https://your-frontend-railway-domain.up.railway.app
+   PORT=5000
+   ```
+7. Wait for deployment to complete
+8. Copy the Service URL (your backend URL)
+
+**That's it!** The root `server.js` wrapper automatically loads the backend server from the `backend/` folder.
+
+---
 
 ### Option B: Using Railway CLI
 
@@ -118,19 +114,28 @@ After frontend deployment, update the backend's `FRONTEND_URL` environment varia
 
 ## Troubleshooting
 
+### ❌ Error: "Cannot find module '/app/server.js'"
+
+**This issue is now FIXED!** 
+
+We created a root-level `server.js` wrapper that Railway can find. It automatically loads the actual backend server from `backend/server.js`.
+
+If you still see this error after redeploy:
+1. Make sure you've pushed the latest code to GitHub
+2. Go to Railway → Backend service → **Deploy** tab
+3. Click **Redeploy** (not "Trigger Deploy")
+4. Wait for the new deployment to finish
+
+---
+
 ### ❌ Error: "No start command detected"
 
-**This is the error you likely got. Here's the fix:**
+**This is also fixed!** The root `package.json` now has:
+```json
+"start": "node server.js"
+```
 
-1. Go to Railway dashboard → Your project → Backend service
-2. Click **Settings** tab
-3. Look for **Root Directory** setting
-4. **Click Edit** and set it to: `backend/`
-5. Go to **Deploy** tab
-6. Click **Redeploy**
-7. Wait for build to complete
-
-**Why this happens:** Railway deploys from repo root by default, but your package.json with the start script is in the `backend/` folder.
+Railroad will automatically detect this.
 
 ---
 
