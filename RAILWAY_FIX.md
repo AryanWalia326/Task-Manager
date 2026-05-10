@@ -79,63 +79,62 @@ After deploying, when you test the backend at `https://YOUR_BACKEND_URL/api/heal
 {"message":"Route not found"}
 ```
 
-### The Causes
+### Quick Diagnosis
 
+The backend is likely crashing due to one of these reasons:
 1. ❌ Root Directory is not set to `backend`
-2. ❌ You're hitting the root domain without a route (e.g., just `https://YOUR_BACKEND_URL/`)
-3. ❌ Backend hasn't fully started yet
+2. ❌ `MONGODB_URI` environment variable not set
+3. ❌ MongoDB connection failed (wrong password or IP not whitelisted)
+4. ❌ Dependencies not installed
 
-### The Solution
+### Quick Fix (Try This First)
 
-**Step 1**: Verify Root Directory
+1. **Go to Railway dashboard** → your backend service
+2. **Click Settings**
+3. **Check Root Directory** = `backend` ✅
+4. **Check Variables**:
+   - `MONGODB_URI` = Should have your MongoDB connection string
+   - `JWT_SECRET` = Should have a value
+5. **Click Deploy** → **Redeploy**
+6. **Wait 3 minutes**
+7. **Test**: `https://YOUR_BACKEND_URL/health`
 
-1. Go to Railway dashboard
-2. Click on your backend service
-3. Click **Settings**
-4. Check **Root Directory** = `backend` ✅
-5. If not, change it and click **Save**
+### Full Diagnostic Guide
 
-**Step 2**: Test Correct Endpoints
+**👉 For detailed troubleshooting: [BACKEND_DIAGNOSTIC.md](./BACKEND_DIAGNOSTIC.md)**
 
-Test these URLs (they should both work):
+This guide walks through:
+- Checking Railway settings
+- Reading deployment logs
+- Fixing MongoDB connection issues
+- Verifying environment variables
+- Testing endpoints
 
+---
+
+## What I Fixed in Your Code
+
+✅ Added better logging to show startup status
+✅ App now continues running even if MongoDB fails (for health checks)
+✅ Added more detailed error messages in logs
+✅ MongoDB connection errors now show clear messages
+
+**To use these fixes:**
+
+```bash
+cd "c:\Users\aryan\OneDrive\Desktop\Task Manager"
+git add .
+git commit -m "Fix: Better error handling and logging"
+git push
 ```
-https://YOUR_BACKEND_URL/health
-https://YOUR_BACKEND_URL/api/health
-```
 
-Both should return:
-```json
-{"message":"Server is running"}
-```
-
-**Step 3**: If Still Not Working
-
-1. Go to **Deploy** tab
-2. Click **Redeploy** (full rebuild)
-3. Wait for "Succeeded" status
-4. Wait 1-2 more minutes for startup
-5. Try again
-
-**Step 4**: Check Backend is Actually Running
-
-1. In Railway, click **Logs** tab
-2. Look for: `Server running on port 5000`
-3. If you don't see this, check for errors in logs
-
-### Why This Happens
-
-- **Root Directory was empty**: Railway tries to run from monorepo root instead of backend folder
-- **Timing issue**: Sometimes takes a few seconds to start after deployment succeeds
-- **CORS/Network**: Check your backend URL is correct (don't add `/api` twice)
-
-✅ **This is now fixed in the code!**
+Then redeploy in Railway.
 
 ---
 
 ## Need More Help?
 
-See the detailed guide: [DEPLOYMENT.md](./DEPLOYMENT.md)
+See the detailed diagnostic guide: [BACKEND_DIAGNOSTIC.md](./BACKEND_DIAGNOSTIC.md)
 
 ---
 
