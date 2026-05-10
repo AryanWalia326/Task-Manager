@@ -70,6 +70,69 @@ Once backend is deployed, follow these steps:
 
 ---
 
+## 🚨 ERROR: "Route not found" or "Cannot GET /api/health"
+
+### The Problem
+
+After deploying, when you test the backend at `https://YOUR_BACKEND_URL/api/health`, you get:
+```json
+{"message":"Route not found"}
+```
+
+### The Causes
+
+1. ❌ Root Directory is not set to `backend`
+2. ❌ You're hitting the root domain without a route (e.g., just `https://YOUR_BACKEND_URL/`)
+3. ❌ Backend hasn't fully started yet
+
+### The Solution
+
+**Step 1**: Verify Root Directory
+
+1. Go to Railway dashboard
+2. Click on your backend service
+3. Click **Settings**
+4. Check **Root Directory** = `backend` ✅
+5. If not, change it and click **Save**
+
+**Step 2**: Test Correct Endpoints
+
+Test these URLs (they should both work):
+
+```
+https://YOUR_BACKEND_URL/health
+https://YOUR_BACKEND_URL/api/health
+```
+
+Both should return:
+```json
+{"message":"Server is running"}
+```
+
+**Step 3**: If Still Not Working
+
+1. Go to **Deploy** tab
+2. Click **Redeploy** (full rebuild)
+3. Wait for "Succeeded" status
+4. Wait 1-2 more minutes for startup
+5. Try again
+
+**Step 4**: Check Backend is Actually Running
+
+1. In Railway, click **Logs** tab
+2. Look for: `Server running on port 5000`
+3. If you don't see this, check for errors in logs
+
+### Why This Happens
+
+- **Root Directory was empty**: Railway tries to run from monorepo root instead of backend folder
+- **Timing issue**: Sometimes takes a few seconds to start after deployment succeeds
+- **CORS/Network**: Check your backend URL is correct (don't add `/api` twice)
+
+✅ **This is now fixed in the code!**
+
+---
+
 ## Need More Help?
 
 See the detailed guide: [DEPLOYMENT.md](./DEPLOYMENT.md)

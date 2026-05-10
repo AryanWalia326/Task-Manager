@@ -19,15 +19,20 @@ app.use(express.json());
 // Connect to database
 connectDB();
 
+// Health check (at root level for quick verification)
+app.get('/health', (req, res) => {
+  res.json({ message: 'Server is running' });
+});
+
+// Health check (under /api for consistency)
+app.get('/api/health', (req, res) => {
+  res.json({ message: 'Server is running' });
+});
+
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/projects', projectRoutes);
 app.use('/api/tasks', taskRoutes);
-
-// Health check
-app.get('/health', (req, res) => {
-  res.json({ message: 'Server is running' });
-});
 
 // 404 handler
 app.use((req, res) => {
