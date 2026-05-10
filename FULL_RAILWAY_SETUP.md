@@ -209,7 +209,7 @@ Still in Settings:
 |----------|-------|-------|
 | `MONGODB_URI` | `mongodb+srv://taskmanager:PASSWORD@cluster.mongodb.net/task-manager?retryWrites=true` | Use your connection string from MongoDB |
 | `JWT_SECRET` | `your_random_secret_123!@#xyz` | Create any random string (keep it safe) |
-| `NODE_ENV` | `production` | - |
+| `{"message":"Route not found"}` | `production` | - |
 | `PORT` | `5000` | - |
 
 **Click "Save" after each variable.**
