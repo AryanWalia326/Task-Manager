@@ -4,6 +4,10 @@ const authMiddleware = require('../middleware/auth');
 
 const router = express.Router();
 
+router.get('/test', (req, res) => {
+  res.json({ message: 'Auth routes working' });
+});
+
 router.post('/signup', authController.signup);
 router.post('/register', authController.signup);
 
