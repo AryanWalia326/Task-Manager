@@ -33,8 +33,12 @@ exports.signup = async (req, res) => {
       token,
     });
   } catch (error) {
-    res.status(500).json({ message: 'Server error', error: error.message });
-  }
+  console.error('Signup Error:', error);
+  res.status(500).json({
+    message: 'Server error',
+    error: error.message
+  });
+}
 };
 
 exports.login = async (req, res) => {
