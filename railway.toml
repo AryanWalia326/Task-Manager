@@ -1,11 +1,5 @@
-# Railway.toml configuration for monorepo
-# This file tells Railway how to deploy the project
-# NOTE: Service-specific settings (root directory, build/start commands) 
-# are configured per-service in Railway dashboard, not here
-
 [build]
-builder = "nixpacks"
+builder = "NIXPACKS"
 
 [deploy]
-restartPolicyType = "on_failure"
-restartPolicyMaxRetries = 3
+startCommand = "npm run preview -- --host 0.0.0.0 --port $PORT"
